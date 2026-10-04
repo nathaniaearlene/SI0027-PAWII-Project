@@ -9,4 +9,9 @@ const mahasiswaController = require("../controllers/mahasiswaController");
 // TODO: GET /:id -> mahasiswaController.getById
 // TODO: POST / -> mahasiswaController.create
 
+router.get("/", mahasiswaController.getAll);
+router.get("/:id", mahasiswaController.getById);
+router.post("/", mahasiswaController.create);
+
 module.exports = router;
+ 

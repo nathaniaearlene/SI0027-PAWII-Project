@@ -27,8 +27,6 @@ function logger(req, res, next){
 
 app.use(logger);
 
-
-
 // TODO 4: import & gunakan middleware cors dari package 'cors'
 // agar frontend (mis. http://localhost:5173) dapat mengakses API ini
 
@@ -39,7 +37,6 @@ app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
-
 
 app.use(express.json());
 
@@ -57,7 +54,6 @@ function cekApiKey(req, res, next) {
  
   next();
 }
-
 
 app.get("/mahasiswa", cekApiKey, (req, res) => {
   res.json(mahasiswa);
