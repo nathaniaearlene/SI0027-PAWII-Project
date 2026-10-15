@@ -13,9 +13,30 @@ const alamatSchema = new mongoose.Schema(
 
 const mahasiswaSchema = new mongoose.Schema({
   // TODO: tambahkan field nama (String, required)
+  nama: {
+    type: String,
+    required: true,
+  },
+
   // TODO: tambahkan field nim (String, required, unique)
+  nim: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
   // TODO: tambahkan field alamat bertipe alamatSchema (embedding)
+  alamat: {
+    type: alamatSchema,
+    default: undefined,
+  },
+
   // TODO: tambahkan field prodiId yang mereferensi model 'Prodi' (referencing)
+  prodiId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Prodi",
+  },
+  
   createdAt: { type: Date, default: Date.now },
 });
 
