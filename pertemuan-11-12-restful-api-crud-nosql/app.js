@@ -20,6 +20,7 @@ app.use("/mahasiswa", mahasiswaRoutes);
 app.use("/prodi", prodiRoutes);
 
 // TODO: pasang errorHandler dengan app.use(errorHandler) di sini, PALING AKHIR
+app.use(errorHandler);
 
 mongoose
   .connect(process.env.MONGODB_URI)
