@@ -1,0 +1,9 @@
+{ 
+    "name": "Creaflow Development", 
+    "values": [ { "key": "base_url", "value": "http://localhost:3000", "enabled": true }, 
+    { "key": "tutorialId", "value": "", "enabled": true }, 
+    { "key": "boardId", "value": "", "enabled": true }, 
+    { "key": "showcaseId", "value": "", "enabled": true } 
+    ], 
+    "_postman_variable_scope": "environment" 
+}

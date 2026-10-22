@@ -1,0 +1,191 @@
+{ 
+    "info": { 
+        "name": "Creaflow API - Project Akhir", 
+        "description": "Postman Collection &amp; Automated Test Scripts untuk API Creaflow", 
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        }, 
+        "item": [
+            {
+                "name": "1. GET Penjelajah Ide (Explore Ideas)", 
+                "request": { 
+                    "method": "GET", 
+                    "header": [], 
+                    "url": { 
+                        "raw": "{{base_url}}/ideas", 
+                        "host": ["{{base_url}}"], 
+                        "path": ["ideas"] 
+                        } 
+                    }, 
+                    "event": [ 
+                        { 
+                            "listen": "test", 
+                            "script": { 
+                                "type": "text/javascript", 
+                                "exec": [ 
+                                    "pm.test('Status code adalah 200 OK', function () {",
+                                    " pm.response.to.have.status(200);", 
+                                    "});", 
+                                    "pm.test('Response berupa array daftar ide', function () {", 
+                                    "    const jsonData = pm.response.json();", 
+                                    "    pm.expect(jsonData).to.be.an('array');", 
+                                    "});" 
+                                    ] 
+                                } 
+                            } 
+                        ] 
+                    }, 
+                { 
+                    "name": "2. POST Tambah Tutorial Baru", 
+                    "request": { 
+                        "method": "POST", 
+                        "header": [{ "key": "Content-Type", "value": "application/json" }], 
+                        "body": { 
+                            "mode": "raw", 
+                            "raw": "{\n \"judul\": \"Membuat Vector Art Sederhana di Canva\",\n \"kategori\": \"Desain Grafis\",\n \"tingkatKesulitan\": \"Pemula\",\n \"estimasiWaktu\": \"30 menit\"\\n}" 
+                            }, 
+                            "url": { 
+                                "raw": "{{base_url}}/tutorials", 
+                                "host": ["{{base_url}}"], 
+                                "path": ["tutorials"] } }, 
+                                "event": [ 
+                                    {
+                                        "listen": "test", 
+                                        "script": { 
+                                            "type": "text/javascript", 
+                                            "exec": [ 
+                                                "pm.test('Status code adalah 201 Created', function () {", 
+                                                "   pm.response.to.have.status(201);", 
+                                                "});", 
+                                                "const jsonData = pm.response.json();", 
+                                                "pm.environment.set('tutorialId', jsonData.id || jsonData._id);", 
+                                                "pm.test('Tutorial ID berhasil disimpan ke Environment', function () {", 
+                                                " pm.expect(jsonData.id || jsonData._id).to.exist;", 
+                                                "});" 
+                                                ] 
+                                            } 
+                                        } 
+                                    ] 
+                                }, 
+                                { 
+                                    "name": "3. GET Detail Tutorial Interaktif", 
+                                    "request": { 
+                                        "method": "GET", 
+                                        "header": [], 
+                                        "url": { 
+                                            "raw": "{{base_url}}/tutorials/{{tutorialId}}", 
+                                            "host": ["{{base_url}}"], 
+                                            "path": ["tutorials", "{{tutorialId}}"] 
+                                            } 
+                                        }, 
+                                        "event": [
+                                            { 
+                                                "listen": "test", 
+                                                "script": { 
+                                                    "type": "text/javascript", 
+                                                    "exec": [ 
+                                                        "pm.test('Status code adalah 200 OK', function () {", 
+                                                        "   pm.response.to.have.status(200);", 
+                                                        "});", 
+                                                        "pm.test('Data tutorial memiliki properti judul dan kategori', function () {", 
+                                                        "   const jsonData = pm.response.json();",
+                                                        " pm.expect(jsonData).to.have.property('judul');", 
+                                                        " pm.expect(jsonData).to.have.property('kategori');", 
+                                                        "});" 
+                                                        ] 
+                                                    } 
+                                                } 
+                                            ] 
+                                        }, 
+                                        { 
+                                            "name": "4. POST Buat Papan Koleksi Ide", 
+                                            "request": { 
+                                                "method": "POST", 
+                                                "header": [{ "key": "Content-Type", "value": "application/json" }], 
+                                                "body": { 
+                                                    "mode": "raw", 
+                                                    "raw": "{\n \"namaBoard\": \"Inspirasi Desain UI/UX 2026\",\n \"deskripsi\": \"Kumpulan ide dan tutorial UI/UX untuk proyek portofolio\"\n}" 
+                                                    }, 
+                                                    "url": { 
+                                                        "raw": "{{base_url}}/boards", 
+                                                        "host": ["{{base_url}}"], 
+                                                        "path": ["boards"] } }, 
+                                                        "event": [ 
+                                                            {
+                                                                "listen": "test", 
+                                                                "script": { 
+                                                                    "type": "text/javascript", 
+                                                                    "exec": [ 
+                                                                        "pm.test('Status code adalah 201 Created', function () {", 
+                                                                        " pm.response.to.have.status(201);", 
+                                                                        "});", 
+                                                                        "const jsonData = pm.response.json();", 
+                                                                        "pm.environment.set('boardId', jsonData.id || jsonData._id);" 
+                                                                        ] 
+                                                                    } 
+                                                                } 
+                                                            ] 
+                                                        }, 
+                                                        { 
+                                                            "name": "5. GET Detail Papan Koleksi", 
+                                                            "request": { 
+                                                                "method": "GET",
+                                                                "header": [], 
+                                                                "url": { 
+                                                                    "raw": "{{base_url}}/boards/{{boardId}}", 
+                                                                    "host": ["{{base_url}}"], 
+                                                                    "path": ["boards", "{{boardId}}"] 
+                                                                } 
+                                                            }, 
+                                                            "event": [ 
+                                                                { "listen": "test", 
+                                                                "script": { 
+                                                                    "type": "text/javascript", 
+                                                                    "exec": [ 
+                                                                        "pm.test('Status code adalah 200 OK', function () {", 
+                                                                        " pm.response.to.have.status(200);", 
+                                                                        "});",
+                                                                        "pm.test('Papan koleksi memiliki properti namaBoard', function () {", 
+                                                                        " const jsonData = pm.response.json();", 
+                                                                        " pm.expect(jsonData).to.have.property('namaBoard');", 
+                                                                        "});" 
+                                                                    ] 
+                                                                } 
+                                                            } 
+                                                        ] 
+                                                    }, 
+                                                    { 
+                                                        "name": "6. POST Unggah Pamer Karya Komunitas", 
+                                                        "request": { 
+                                                            "method": "POST", 
+                                                            "header": [{ "key": "Content-Type", "value": "application/json" }], 
+                                                            "body": { 
+                                                                "mode": "raw", 
+                                                                "raw": "{\n \"judulKarya\": \"Hasil Belajar Vector Art Canva\",\n \"tutorialId\": \"{{tutorialId}}\",\n \"catatan\": \"Berhasil mencoba tantangan harian Spark Idea!\"\n}" 
+                                                                }, 
+                                                                "url": {
+                                                                    "raw": "{{base_url}}/showcases",
+                                                                    "host": ["{{base_url}}"], 
+                                                                    "path": ["showcases"] 
+                                                                } 
+                                                            }, 
+                                                            "event": [
+                                                                { 
+                                                                    "listen": "test",
+                                                                    "script": { 
+                                                                        "type": "text/javascript", 
+                                                                        "exec": [ 
+                                                                            "pm.test('Status code adalah 201 Created', function () {", 
+                                                                            " pm.response.to.have.status(201);", 
+                                                                            "});", 
+                                                                            "const jsonData = pm.response.json();",
+                                                                            "pm.environment.set('showcaseId', jsonData.id || jsonData._id);", 
+                                                                            "pm.test('Karya memiliki properti judulKarya', function () {", 
+                                                                            " pm.expect(jsonData).to.have.property('judulKarya');", 
+                                                                            "});" 
+                                                                        ] 
+                                                                    } 
+                                                                } 
+                                                            ] 
+                                                        } 
+                                                    ]
+}
