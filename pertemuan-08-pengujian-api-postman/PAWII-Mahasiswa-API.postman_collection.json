@@ -23,9 +23,16 @@
             "type": "text/javascript",
             "exec": [
               "// TODO 1: tambahkan pm.test yang memeriksa status code 200",
+              "pm.test('Status code adalah 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
               "",
               "// TODO 2: tambahkan pm.test yang memastikan response berupa array",
-              "// gunakan pm.response.json() dan pm.expect(...).to.be.an('array')"
+              "// gunakan pm.response.json() dan pm.expect(...).to.be.an('array')",
+              "pm.test('Response adalah array', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an('array');",
+              "});"
             ]
           }
         }
@@ -53,10 +60,15 @@
             "type": "text/javascript",
             "exec": [
               "// TODO 3: tambahkan pm.test yang memeriksa status code 201",
+              "pm.test('Status code adalah 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
               "",
               "// TODO 4: simpan id dari response ke environment variable",
               "// 'mahasiswaId' menggunakan pm.environment.set(), agar dapat",
-              "// dipakai oleh request 'GET Satu Mahasiswa' di bawah ini"
+              "// dipakai oleh request 'GET Satu Mahasiswa' di bawah ini",
+              "const jsonData = pm.response.json();",
+              "pm.environment.set('mahasiswaId', jsonData.id);"
             ]
           }
         }
@@ -80,9 +92,16 @@
             "type": "text/javascript",
             "exec": [
               "// TODO 5: tambahkan pm.test yang memeriksa status code 200",
+              "pm.test('Status code adalah 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
               "",
               "// TODO 6: tambahkan pm.test yang memastikan data memiliki",
-              "// properti 'nama'"
+              "// properti 'nama'",
+              "pm.test('Response memiliki properti nama', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('nama');",
+              "});"
             ]
           }
         }
