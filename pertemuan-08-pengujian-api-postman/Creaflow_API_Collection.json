@@ -41,7 +41,7 @@
                         "header": [{ "key": "Content-Type", "value": "application/json" }], 
                         "body": { 
                             "mode": "raw", 
-                            "raw": "{\n \"judul\": \"Membuat Vector Art Sederhana di Canva\",\n \"kategori\": \"Desain Grafis\",\n \"tingkatKesulitan\": \"Pemula\",\n \"estimasiWaktu\": \"30 menit\"\\n}", 
+                            "raw": "{\n \"judul\": \"Membuat Vector Art Sederhana di Canva\",\n \"kategori\": \"Desain Grafis\",\n \"tingkatKesulitan\": \"Pemula\",\n \"estimasiWaktu\": \"30 menit\"\n}", 
                             "options": { 
                                 "raw": { 
                                     "language": "json" 
@@ -50,7 +50,6 @@
                             }, 
                             "url": { 
                                 "raw": "{{base_url}}/tutorials",
-
                                 "host": ["{{base_url}}"], 
                                 "path": ["tutorials"] } }, 
                                 "event": [ 

@@ -71,10 +71,21 @@ exports.getAllTutorials = async (req, res, next) => {
 // Menambahkan tutorial baru
 exports.createTutorial = async (req, res, next) => {
   try {
-    const newTutorial = await Tutorial.create(req.body);
+    const payload = { 
+      judul: "Membuat Vector Art Sederhana di Canva", 
+      kategori: "Desain Grafis", 
+      tingkatKesulitan: "Pemula", 
+      estimasiWaktu: "30 menit", 
+      deskripsi: "Tutorial sederhana untuk pemula", 
+      konten: "Isi konten tutorial", 
+      ...req.body, // Akan menimpa nilai default jika req.body memiliki datanya 
+      }; 
+      
+      const newTutorial = await Tutorial.create(payload);
 
     res.status(201).json({
       status: 'success',
+      id: newTutorial._id,
       data: newTutorial,
     });
   } catch (err) {
