@@ -6,6 +6,7 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 import { MahasiswaListComponent } from '../../components/mahasiswa-list/mahasiswa-list.component';
 import { Mahasiswa } from '../../mahasiswa.model';
 // TODO: tambahkan import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 const DATA_MAHASISWA: Mahasiswa[] = [
   { id: 1, nama: 'Andi', nim: '2024001' },
@@ -22,6 +23,7 @@ const DATA_MAHASISWA: Mahasiswa[] = [
 export class DaftarMahasiswaPageComponent {
   keyword = '';
   // TODO: deklarasikan apiBaseUrl = environment.apiBaseUrl;
+  appBaseUrl = environment.apiBaseUrl;
 
   get mahasiswaTersaring(): Mahasiswa[] {
     return DATA_MAHASISWA.filter((m) =>
