@@ -18,14 +18,21 @@ const DATA_MAHASISWA = [
 
 function DaftarMahasiswaPage() {
   // TODO: buat state keyword dengan useState('')
+  const [keyword, setKeyword] = useState('');
 
   // TODO: hitung mahasiswaTersaring - filter DATA_MAHASISWA berdasarkan
   // apakah m.nama.toLowerCase() mengandung keyword.toLowerCase()
+  const mahasiswaTersaring = DATA_MAHASISWA.filter((m) =>
+    m.nama.toLowerCase().includes(keyword.trim().toLowerCase())
+  );
 
   return (
     <>
       {/* TODO: render <SearchBar keyword={keyword} onSearch={setKeyword} /> */}
+      {<SearchBar keyword={keyword} onSearch={setKeyword}/>}
+
       {/* TODO: render <MahasiswaList mahasiswa={mahasiswaTersaring} /> */}
+      {<MahasiswaList mahasiswa={mahasiswaTersaring}/>}
     </>
   );
 }
@@ -37,7 +44,9 @@ function App() {
       <Routes>
         <Route path="/" element={<DaftarMahasiswaPage />} />
         <Route path="/tentang" element={<Tentang />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

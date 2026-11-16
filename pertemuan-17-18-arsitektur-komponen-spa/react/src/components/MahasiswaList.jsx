@@ -5,9 +5,11 @@ import MahasiswaCard from "./MahasiswaCard";
 
 function MahasiswaList( {mahasiswa}/* TODO: destructure { mahasiswa } dari props */) {
   // TODO: jika mahasiswa.length === 0, kembalikan <p className="empty">Tidak ada mahasiswa yang cocok.</p>
+  // Jika array mahasiswa kosong, tampilkan pesan kosong
   if (mahasiswa.length === 0) {
     return <p className="empty">Tidak ada mahasiswa yang cocok.</p>;
   }
+  console.log(mahasiswa);
 
   return (
     <div className="mahasiswa-list">
